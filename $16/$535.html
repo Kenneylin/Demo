@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+    div{
+        margin: 20px;
+        border: solid 1px blue;
+        font-size: 18px;
+    }
+    </style>
+</head>
+<body>
+    <div class="div-1">div-1
+            <div class="div-2">div-2
+                    <div class="div-3">div-3
+                            <div class="div-4">div-4
+                                    <div class="div-5">div-5
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+    </div> 
+    <p id="show"></p>
+    <script type="text/javascript">
+    function bubbleup() {
+        var div=document.getElementsByTagName("div");
+        var show=document.getElementById("show");
+        for(var i=0;i<div.length;i++){
+            div[i].onclick=(function(i){
+                return function(){
+                    div[i].style.border="1px dashed red";
+                    show.innerText+=div[i].className+">";
+                }
+            })(i);
+        }
+    } 
+    function bubbledown() {
+        var div=document.getElementsByTagName("div");
+        var show=document.getElementById("show");
+        for(var i=0;i<div.length;i++){
+            div[i].addEventListener("click",(function(i){
+                return function(){
+                    div[i].style.border="1px dashed red";
+                    show.innerText+=div[i].className+">";
+                }
+            })(i),true);
+        }
+    } 
+    function myfuctionup() {
+        var div=document.querySelectorAll("div");
+        var show=document.querySelector("p");
+        for(let i=0;i<div.length;i++){
+            div[i].onclick=function(){
+                div[i].style.border="1px dashed red";
+                show.innerText+=div[i].className+">";
+            }
+        }    
+    }
+    function myfuctiondown() {
+        var div=document.querySelectorAll("div");
+        var show=document.querySelector("p");
+        for(let i=0;i<div.length;i++){
+            div[i].addEventListener("click",function() {
+                div[i].style.border="1px dashed red";
+                show.innerText+=div[i].className+">";
+            },true)            
+        }    
+    }
+    window.onload=myfuctiondown;
+    </script>
+</body>
+</html>
